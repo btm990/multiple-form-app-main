@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'header-mb': "url('../assets/images/bg-sidebar-mobile.svg')",
-        'sidebar-dt': "url('../assets/images/bg-sidebar-desktop.svg')"
+        'header-mb': "url('./assets/images/bg-sidebar-mobile.svg')",
+        'sidebar-dt': "url('./assets/images/bg-sidebar-desktop.svg')"
       },
       colors: {
         MarineBlue: 'hsl(213, 96%, 18%)',

@@ -3,7 +3,7 @@ function Steps(props) {
 
     return (
 
-    <div className="flex items-center justify-center gap-x-4 mt-[-5.5rem] lg:mt-0 lg:bg-sidebar-dt lg:h-[568px] lg:w-[274px] lg:flex-col lg:justify-start lg:items-start lg:gap-7 lg:p-8"> {/* steps p-8 lg:bg-sidebar-dt lg:h-[568px] */}
+    <div className="flex items-center justify-center gap-x-4 mt-[-5.5rem] lg:mt-0 lg:bg-sidebar-dt lg:h-[568px] lg:min-w-[274px] lg:flex-col lg:justify-start lg:items-start lg:gap-7 lg:p-8"> {/* steps p-8 lg:bg-sidebar-dt lg:h-[568px] */}
         
         <div className="items-center flex gap-x-5">
             <div className={clsx("aspect-square w-8 rounded-[100%] border grid place-content-center", {
