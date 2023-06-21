@@ -1,7 +1,8 @@
 import arcadeIcon from '../assets/images/icon-arcade.svg';
 import advancedIcon from "../assets/images/icon-advanced.svg";
 import proIcon from "../assets/images/icon-pro.svg";
-import { useState } from 'react';
+import { useContext } from 'react';
+import { PlanContext } from '../pages/FormPage';
 import clsx from 'clsx'
 
 function scrollFunction() {
@@ -10,9 +11,11 @@ function scrollFunction() {
 }
 
 function PlanRadioButton(props) {
+    const [, setPlan] = useContext(PlanContext)
+
     return (
     <div>
-        <input type="radio" name="plan" id={props.title} className="peer appearance-none block" />
+        <input type="radio" name="plan" id={props.title} className="peer appearance-none block" onChange={(e) => {setPlan(e.target.id)}}/>
         <label htmlFor={props.title} className="peer-checked:bg-Alabaster peer-checked:border-PurplishBlue peer-checked:border peer-checked:rounded-lg border-2 border-LightGray rounded-lg w-full h-full flex  items-start p-4 lg:flex-col lg:gap-11 lg:pr-10 lg:min-w-[8.5rem]">
             <img className="inline-block mr-3 mt-[0.125rem]" src={props.icon} alt="arcade icon" />
             <div className="inline-block">
@@ -43,19 +46,18 @@ function ToggleSwitch(props) {
     )
 }
 
-function PlanSelection() {
-    let [yearly, setYearly] = useState(false)
+function PlanSelection(props) {
     return (
-    <div>
+    <div className={clsx({"hidden": props.step !== 2})}>
 
         <fieldset className="flex flex-col gap-3 lg:flex-row lg:gap-4">
             <legend className="hidden">Plan Selection Options</legend>
-            <PlanRadioButton title="Arcade" icon={arcadeIcon} priceMonthly="9" priceYearly="90" yearlyOption={yearly}/>
-            <PlanRadioButton title="Advanced" icon={advancedIcon} priceMonthly="12" priceYearly="120" yearlyOption={yearly}/>
-            <PlanRadioButton title="Pro" icon={proIcon} priceMonthly="15" priceYearly="150" yearlyOption={yearly}/>
+            <PlanRadioButton title="Arcade" icon={arcadeIcon} priceMonthly="9" priceYearly="90" yearlyOption={props.yearly}/>
+            <PlanRadioButton title="Advanced" icon={advancedIcon} priceMonthly="12" priceYearly="120" yearlyOption={props.yearly}/>
+            <PlanRadioButton title="Pro" icon={proIcon} priceMonthly="15" priceYearly="150" yearlyOption={props.yearly}/>
         </fieldset>
 
-        <ToggleSwitch yearlyOption={yearly} setYearlyOption={setYearly}/>
+        <ToggleSwitch yearlyOption={props.yearly} setYearlyOption={props.setYearly}/>
 
     </div>
     )
