@@ -36,7 +36,7 @@ function Summary(props) {
                 <div className="justify-between flex items-center">
                     <div className="">
                         <span className="block text-MarineBlue font-semibold">{plan} {`(${props.yearly ? "Yearly" : "Monthly"})`}</span>
-                        <span className="underline text-CoolGray hover:cursor-pointer" onClick={() => props.setStepNo(2)}>Change</span>
+                        <span className="underline text-CoolGray hover:cursor-pointer hover:text-PurplishBlue" onClick={() => props.setStepNo(2)}>Change</span>
                     </div>
                     <span className="text-MarineBlue font-semibold">${`${props.plansPrices[plan][props.yearly ? "Yearly" : "Monthly"]}/${props.yearly ? 'yr' : 'mo'}`}</span>
                 </div>
