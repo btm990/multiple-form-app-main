@@ -8,7 +8,7 @@ function AddOnItem(props) {
     let [addOns, setAddOns] = useContext(AddOnContext)
 
     return(
-        <label htmlFor={idTitle} className={clsx("border border-LightGray px-4 py-[0.6875rem] lg:box-border lg:px-5 lg:py-5 flex gap-4 items-center rounded-md justify-between", {"border-PurplishBlue bg-Alabaster" : active})}>
+        <label htmlFor={idTitle} className={clsx("border border-LightGray px-4 py-[0.6875rem] lg:box-border lg:px-5 lg:py-5 flex gap-4 items-center rounded-md justify-between hover:border-PurplishBlue", {"border-PurplishBlue bg-Alabaster" : active})}>
             <div className="flex gap-4">
                 <input id={idTitle} type="checkbox" className="appearance-none relative w-4 h-4 rounded-sm border top-[0.5625rem] border-LightGray before:content-['✔'] before:absolute before:text-xs before:text-white before:invisible checked:bg-PurplishBlue checked:border-none checked:before:visible before:right-[0.1875rem] before:top-[0]" onChange={() => {
                     active ? setActive(false) : setActive(true)
@@ -19,7 +19,7 @@ function AddOnItem(props) {
                     <span className=" text-xs text-CoolGray">{props.addOnDescription}</span>
                 </div>
             </div>
-            <span className="text-xs text-PurplishBlue">+${props.yearlyOption ? `${props.addOnPriceYearly}/yr` : `${props.addOnPriceMonthly}/mo`}</span>
+            <span className="text-sm text-PurplishBlue">+${props.yearlyOption ? `${props.addOnPriceYearly}/yr` : `${props.addOnPriceMonthly}/mo`}</span>
         </label>
     )
 }

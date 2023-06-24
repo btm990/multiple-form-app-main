@@ -8,19 +8,17 @@ function BottomToolbar(props) {
                 if (props.step !== 1) {
                     props.nextCallback(props.step - 1)
                 }
-            }} className={clsx("border-none text-CoolGray pr-4 pl-4 my-4 mx-4 rounded-[0.25rem] text-sm lg:my-3 lg:mx-0 lg:pr-5 lg:pl-0 lg:text-base", {"hidden": props.step === 1})}>Go Back</button>
+            }} className={clsx("border-none text-CoolGray hover:text-MarineBlue pr-4 pl-4 my-4 mx-4 rounded-[0.25rem] text-sm lg:my-3 lg:mx-0 lg:pr-5 lg:pl-0 lg:text-base", {"hidden": props.step === 1 || props.formSubmitted})}>Go Back</button>
             
             <button onClick={() => {
                 if (props.step !== 4) {
                     props.nextCallback(props.step + 1)
                 }
-            }} className={clsx("border-none bg-MarineBlue text-white px-4 my-4 mx-4 rounded-[0.25rem] text-sm lg:my-3 lg:mx-0 lg:px-5 lg:text-base", {"hidden": props.step === 4})}>Next Step</button>
+            }} className={clsx("border-none bg-MarineBlue text-white px-4 my-4 mx-4 rounded-[0.25rem] text-sm lg:my-3 lg:mx-0 lg:px-5 lg:text-base", {"hidden": props.step === 4 || props.formSubmitted})}>Next Step</button>
         
-            <button onClick={() => {
-                    if (props.step !== 4) {
-                        props.nextCallback(props.step + 1)
-                    }
-            }} className={clsx("border-none bg-PurplishBlue text-white px-4 my-4 mx-4 rounded-[0.25rem] text-sm lg:my-3 lg:mx-0 lg:px-5 lg:text-base min-w-[95px]", {"block": props.step === 4, "hidden": props.step !== 4})}>Confirm</button>
+            <button type="submit" onClick={() => {
+                props.submitForm(true)
+            }} className={clsx("border-none bg-PurplishBlue text-white px-4 my-4 mx-4 rounded-[0.25rem] text-sm lg:my-3 lg:mx-0 lg:px-5 lg:text-base min-w-[95px]", {"block": props.step === 4, "hidden": props.step !== 4 || props.formSubmitted})}>Confirm</button>
 
         </div>
     )

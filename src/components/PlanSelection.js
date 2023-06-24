@@ -15,8 +15,8 @@ function PlanRadioButton(props) {
 
     return (
     <div>
-        <input type="radio" name="plan" id={props.title} className="peer appearance-none block" onChange={(e) => {setPlan(e.target.id)}}/>
-        <label htmlFor={props.title} className="peer-checked:bg-Alabaster peer-checked:border-PurplishBlue peer-checked:border peer-checked:rounded-lg border-2 border-LightGray rounded-lg w-full h-full flex  items-start p-4 lg:flex-col lg:gap-11 lg:pr-10 lg:min-w-[8.5rem]">
+        <input type="radio" name="plan" defaultChecked={props.title === "Arcade"} id={props.title} className="peer appearance-none block" onChange={(e) => {setPlan(e.target.id)}}/>
+        <label htmlFor={props.title} className=" hover:border-PurplishBlue hover:border peer-checked:bg-Alabaster peer-checked:border-PurplishBlue peer-checked:border peer-checked:rounded-lg border-2 border-LightGray rounded-lg w-full h-full flex  items-start p-4 lg:flex-col lg:gap-11 lg:pr-10 lg:min-w-[8.5rem]">
             <img className="inline-block mr-3 mt-[0.125rem]" src={props.icon} alt="arcade icon" />
             <div className="inline-block">
                 <span className="inline text-MarineBlue font-semibold">{props.title}</span>
