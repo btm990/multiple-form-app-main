@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/multiple-form-app-main/static/css/main.10455712.css",
+    "main.js": "/multiple-form-app-main/static/js/main.38f7c5ee.js",
+    "static/media/bg-sidebar-desktop.svg": "/multiple-form-app-main/static/media/bg-sidebar-desktop.6918153f38678372ceb1.svg",
+    "static/media/bg-sidebar-mobile.svg": "/multiple-form-app-main/static/media/bg-sidebar-mobile.ad41661b40ca0b967f3a.svg",
+    "static/media/icon-advanced.svg": "/multiple-form-app-main/static/media/icon-advanced.705bd10c4c1f688871d729633f0ca4ae.svg",
+    "index.html": "/multiple-form-app-main/index.html",
+    "static/media/icon-thank-you.svg": "/multiple-form-app-main/static/media/icon-thank-you.ee753f231cc5a5789b8eb922a96472c0.svg",
+    "static/media/icon-pro.svg": "/multiple-form-app-main/static/media/icon-pro.2e7e377da9c658d608624304a0f8dae6.svg",
+    "static/media/icon-arcade.svg": "/multiple-form-app-main/static/media/icon-arcade.a08c098289a31bb2f66d675be71565b3.svg",
+    "main.10455712.css.map": "/multiple-form-app-main/static/css/main.10455712.css.map",
+    "main.38f7c5ee.js.map": "/multiple-form-app-main/static/js/main.38f7c5ee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.10455712.css",
+    "static/js/main.38f7c5ee.js"
+  ]
+}
