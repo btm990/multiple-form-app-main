@@ -7,6 +7,14 @@ import AddOns from "../components/AddOns";
 import Summary from "../components/Summary";
 import clsx from "clsx";
 import ThankYou from "../components/ThankYou";
+import { useEffect } from "react";
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+    const data = new FormData(e.target)
+    console.log(Object.fromEntries(data.entries()))
+}
+
 
 const plansPricing = {
     Arcade: {
@@ -47,12 +55,17 @@ function FormPage() {
     let [plan, setPlan] = useState('Arcade')    // this state will be passed down through context
     let [addOns, setAddOns] = useState([])      // this state will be passed down through context
     let [formSubmitted, setFormSubmitted] = useState(false)
-    
+    let [invalidFields, setInvalidFields] = useState([])
+
+    useEffect(() => {
+        console.log(invalidFields)
+    }, [invalidFields])
+
     const stepComponents = {
         1: {
             title: 'Personal info',
             description: 'Please provide your name, email address, and phone number.',
-            component: <InfoForm step={stepNo}/>
+            component: <InfoForm step={stepNo} invalidFields={invalidFields} setInvalidFields={setInvalidFields}/>
         },
         2: {
             title: 'Select your plan',
@@ -82,7 +95,7 @@ function FormPage() {
                     <p className="text-gray-400 pr-4 pb-6 lg:pb-9">{stepComponents[stepNo].description}</p>
                     <PlanContext.Provider value={[plan, setPlan]}>
                         <AddOnContext.Provider value={[addOns, setAddOns]}>
-                            <form action="#" method="GET">
+                            <form onSubmit={handleSubmit} id="main-form" action="#" method="GET">
                                 {stepComponents[1].component}
                                 {stepComponents[2].component}
                                 {stepComponents[3].component}
@@ -90,7 +103,7 @@ function FormPage() {
                             </form>
                         </AddOnContext.Provider>
                     </PlanContext.Provider>
-                    <BottomToolbar step={stepNo} nextCallback={setStepNo} formSubmitted={formSubmitted} submitForm={setFormSubmitted} />
+                    <BottomToolbar step={stepNo} nextCallback={setStepNo} formSubmitted={formSubmitted} submitForm={setFormSubmitted} invalidFields={invalidFields} />
                 </div>
 
                 {formSubmitted ? <ThankYou /> : ''}
@@ -102,5 +115,6 @@ function FormPage() {
         </div>
     )
 }
+
 
 export default FormPage;
