@@ -7,6 +7,68 @@ import AddOns from "../components/AddOns";
 import Summary from "../components/Summary";
 import clsx from "clsx";
 import ThankYou from "../components/ThankYou";
+import { useEffect } from "react";
+
+const handleSubmit = (e, setFormSubmitted) => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    //console.log(Object.fromEntries(data.entries()))
+    const dataUser = {}
+    const dataSubscription = {}
+
+    for (const [key, val] of formData.entries()) {
+        if (["name", "email", "phone"].includes(key)) {
+            dataUser[key] = val
+        }
+        else {
+            dataSubscription[key] = val
+        }
+    }
+    //console.log(Object.fromEntries(data.entries()))
+    // const dataObj = Object.fromEntries(data.entries())
+    // let dataObj_user
+    // let dataObj_subscription
+
+    const baseUrl = "http://localhost:8000/"
+    const url_users = baseUrl + "api/users/"
+    const url_subscription = baseUrl + "api/subscriptions/"
+
+    fetch(url_users, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataUser)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Something went wrong")
+            }
+            setFormSubmitted(true)
+            return response.json()
+        })
+        .then((userData) => {
+            dataSubscription.user = userData.user.id
+            console.log(userData)
+            return fetch(url_subscription, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataSubscription)
+            })
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Something went wrong")
+            }
+            return response.json()
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
 
 const plansPricing = {
     Arcade: {
@@ -47,12 +109,17 @@ function FormPage() {
     let [plan, setPlan] = useState('Arcade')    // this state will be passed down through context
     let [addOns, setAddOns] = useState([])      // this state will be passed down through context
     let [formSubmitted, setFormSubmitted] = useState(false)
-    
+    let [invalidFields, setInvalidFields] = useState([])
+
+    useEffect(() => {
+        console.log(invalidFields)
+    }, [invalidFields])
+
     const stepComponents = {
         1: {
             title: 'Personal info',
             description: 'Please provide your name, email address, and phone number.',
-            component: <InfoForm step={stepNo}/>
+            component: <InfoForm step={stepNo} invalidFields={invalidFields} setInvalidFields={setInvalidFields}/>
         },
         2: {
             title: 'Select your plan',
@@ -82,7 +149,7 @@ function FormPage() {
                     <p className="text-gray-400 pr-4 pb-6 lg:pb-9">{stepComponents[stepNo].description}</p>
                     <PlanContext.Provider value={[plan, setPlan]}>
                         <AddOnContext.Provider value={[addOns, setAddOns]}>
-                            <form action="#" method="GET">
+                            <form onSubmit={(e) => handleSubmit(e, setFormSubmitted)} id="main-form">
                                 {stepComponents[1].component}
                                 {stepComponents[2].component}
                                 {stepComponents[3].component}
@@ -90,7 +157,7 @@ function FormPage() {
                             </form>
                         </AddOnContext.Provider>
                     </PlanContext.Provider>
-                    <BottomToolbar step={stepNo} nextCallback={setStepNo} formSubmitted={formSubmitted} submitForm={setFormSubmitted} />
+                    <BottomToolbar step={stepNo} nextCallback={setStepNo} formSubmitted={formSubmitted} submitForm={setFormSubmitted} invalidFields={invalidFields} />
                 </div>
 
                 {formSubmitted ? <ThankYou /> : ''}
@@ -102,5 +169,6 @@ function FormPage() {
         </div>
     )
 }
+
 
 export default FormPage;

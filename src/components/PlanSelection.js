@@ -15,7 +15,7 @@ function PlanRadioButton(props) {
 
     return (
     <div>
-        <input type="radio" name="plan" defaultChecked={props.title === "Arcade"} id={props.title} className="peer appearance-none block" onChange={(e) => {setPlan(e.target.id)}}/>
+        <input type="radio" name="plan" value={props.title} defaultChecked={props.title === "Arcade"} id={props.title} className="peer appearance-none block" onChange={(e) => {setPlan(e.target.id)}}/>
         <label htmlFor={props.title} className=" hover:border-PurplishBlue hover:border peer-checked:bg-Alabaster peer-checked:border-PurplishBlue peer-checked:border peer-checked:rounded-lg border-2 border-LightGray rounded-lg w-full h-full flex  items-start p-4 lg:flex-col lg:gap-11 lg:pr-10 lg:min-w-[8.5rem]">
             <img className="inline-block mr-3 mt-[0.125rem]" src={props.icon} alt="arcade icon" />
             <div className="inline-block">
@@ -34,7 +34,7 @@ function ToggleSwitch(props) {
             <span className={clsx("text-sm", "text-CoolGray",
             {"text-MarineBlue": !props.yearlyOption,})}>Monthly</span>
             <label htmlFor="yearly-option" className="relative inline-block w-10 h-5 ">
-                <input type="checkbox" id="yearly-option" className="opacity-0 w-0 h-0 peer" onChange={() => {
+                <input type="checkbox" name="yearly" id="yearly-option" className="opacity-0 w-0 h-0 peer" onChange={() => {
                     scrollFunction()
                     props.yearlyOption ? props.setYearlyOption(false) : props.setYearlyOption(true)
                     }}/>
@@ -57,6 +57,7 @@ function PlanSelection(props) {
             <PlanRadioButton title="Pro" icon={proIcon} priceMonthly="15" priceYearly="150" yearlyOption={props.yearly}/>
         </fieldset>
 
+        <input type="hidden" name="yearly" value="off" />
         <ToggleSwitch yearlyOption={props.yearly} setYearlyOption={props.setYearly}/>
 
     </div>
