@@ -9,10 +9,64 @@ import clsx from "clsx";
 import ThankYou from "../components/ThankYou";
 import { useEffect } from "react";
 
-const handleSubmit = (e) => {
+const handleSubmit = (e, setFormSubmitted) => {
     e.preventDefault()
-    const data = new FormData(e.target)
-    console.log(Object.fromEntries(data.entries()))
+    const formData = new FormData(e.target)
+    //console.log(Object.fromEntries(data.entries()))
+    const dataUser = {}
+    const dataSubscription = {}
+
+    for (const [key, val] of formData.entries()) {
+        if (["name", "email", "phone"].includes(key)) {
+            dataUser[key] = val
+        }
+        else {
+            dataSubscription[key] = val
+        }
+    }
+    //console.log(Object.fromEntries(data.entries()))
+    // const dataObj = Object.fromEntries(data.entries())
+    // let dataObj_user
+    // let dataObj_subscription
+
+    const baseUrl = "http://localhost:8000/"
+    const url_users = baseUrl + "api/users/"
+    const url_subscription = baseUrl + "api/subscriptions/"
+
+    fetch(url_users, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataUser)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Something went wrong")
+            }
+            setFormSubmitted(true)
+            return response.json()
+        })
+        .then((userData) => {
+            dataSubscription.user = userData.user.id
+            console.log(userData)
+            return fetch(url_subscription, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataSubscription)
+            })
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Something went wrong")
+            }
+            return response.json()
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 
@@ -95,7 +149,7 @@ function FormPage() {
                     <p className="text-gray-400 pr-4 pb-6 lg:pb-9">{stepComponents[stepNo].description}</p>
                     <PlanContext.Provider value={[plan, setPlan]}>
                         <AddOnContext.Provider value={[addOns, setAddOns]}>
-                            <form onSubmit={handleSubmit} id="main-form" action="#" method="GET">
+                            <form onSubmit={(e) => handleSubmit(e, setFormSubmitted)} id="main-form">
                                 {stepComponents[1].component}
                                 {stepComponents[2].component}
                                 {stepComponents[3].component}
