@@ -24,7 +24,7 @@ const handleSubmit = (e, setFormSubmitted) => {
         }
     }
 
-    const baseUrl = "http://localhost:8000/"
+    const baseUrl = "https://027d-105-184-236-56.ngrok-free.app/"
     const url_users = baseUrl + "api/users/"
     const url_subscription = baseUrl + "api/subscriptions/"
 
