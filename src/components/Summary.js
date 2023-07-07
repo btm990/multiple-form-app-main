@@ -52,7 +52,7 @@ function Summary(props) {
 
             <div className="justify-between flex items-center px-3 my-6">
                 <span className=" text-CoolGray text-sm ">Total {`(per ${props.yearly ? "year" : "month"})`}</span>
-                <span className="text-PurplishBlue text-lg font-semibold">+${`${priceTotal}/${props.yearly ? 'mo' : 'yr'}`}</span>
+                <span className="text-PurplishBlue text-lg font-semibold">+${`${priceTotal}/${props.yearly ? 'yr' : 'mo'}`}</span>
             </div>
 
         </div>
