@@ -12,7 +12,6 @@ import { useEffect } from "react";
 const handleSubmit = (e, setFormSubmitted) => {
     e.preventDefault()
     const formData = new FormData(e.target)
-    //console.log(Object.fromEntries(data.entries()))
     const dataUser = {}
     const dataSubscription = {}
 
@@ -24,10 +23,6 @@ const handleSubmit = (e, setFormSubmitted) => {
             dataSubscription[key] = val
         }
     }
-    //console.log(Object.fromEntries(data.entries()))
-    // const dataObj = Object.fromEntries(data.entries())
-    // let dataObj_user
-    // let dataObj_subscription
 
     const baseUrl = "http://localhost:8000/"
     const url_users = baseUrl + "api/users/"
